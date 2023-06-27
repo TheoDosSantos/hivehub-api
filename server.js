@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const roomRoute = require("./routes/roomRoute");
+const userRoute = require("./routes/userRoute");
 const errorMiddleware = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -11,7 +12,7 @@ const MONGO_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT || 8000;
 const FRONT_URL = process.env.FRONT_URL;
 
-var corsOptions = {
+const corsOptions = {
   origin: [FRONT_URL, "http://example.com"],
   optionsSuccessStatus: 200,
 };
@@ -24,6 +25,7 @@ app.use(errorMiddleware);
 //Routes
 
 app.use("/api/rooms", roomRoute);
+app.use("/api/users", userRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
