@@ -109,8 +109,8 @@ const getAvailableRooms = asyncHandler(async (req, res) => {
       const booking = room.booking;
       const isAvailable = booking.every((book) => {
         return (
-          moment(startDateTime).isBefore(book.startDate) ||
-          moment(endDateTime).isAfter(book.endDate)
+          (moment(startDateTime).isBefore(book.startDate) && moment(endDateTime).isBefore(book.startDate)) ||
+          (moment(startDateTime).isAfter(book.endDate) && moment(endDateTime).isAfter(book.endDate))
         );
       });
       return isAvailable;
