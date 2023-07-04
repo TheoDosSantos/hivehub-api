@@ -9,26 +9,27 @@ const {
   bookRoom,
   getAvailableRooms
 } = require("../controllers/roomController");
+const protect = require("../middleware/authMiddleware");
 
 // Get all rooms
-router.get("/", getAllRooms);
+router.get("/", protect, getAllRooms);
 
 // Get a room
-router.get("/:id", getRoom);
+router.get("/:id", protect, getRoom);
 
 // Create a room
-router.post("/", createRoom);
+router.post("/", protect, createRoom);
 
 // Update a room
-router.put("/:id", updateRoom);
+router.put("/:id", protect, updateRoom);
 
 // Delete a room
-router.delete("/:id", deleteRoom);
+router.delete("/:id", protect, deleteRoom);
 
 // Book a room
-router.put("/book/:id", bookRoom);
+router.put("/book/:id", protect, bookRoom);
 
 // Get available rooms
-router.get("/available/date", getAvailableRooms);
+router.get("/available/date", protect, getAvailableRooms);
 
 module.exports = router;

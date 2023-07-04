@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const roomRoute = require("./routes/roomRoute");
 const userRoute = require("./routes/userRoute");
@@ -13,10 +14,11 @@ const PORT = process.env.PORT || 8000;
 const FRONT_URL = process.env.FRONT_URL;
 
 const corsOptions = {
+  credentials: true,
   origin: [FRONT_URL, "http://example.com"],
   optionsSuccessStatus: 200,
 };
-
+app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -41,7 +41,6 @@ const createUser = asyncHandler(async (req, res) => {
           name: user.name,
           firstname: user.firstname,
           mail: user.mail,
-          token: generateToken(user._id),
         });
       } else {
         res.status(400);
@@ -75,7 +74,6 @@ const updateUser = asyncHandler(async (req, res) => {
         name: user.name,
         firstname: user.firstname,
         mail: user.mail,
-        token: generateToken(user._id),
       });
     }
   } catch (error) {
@@ -106,12 +104,16 @@ const authUser = asyncHandler(async (req, res) => {
     const { mail, password } = req.body;
     const user = await User.findOne({ mail });
     if (user && (await user.matchPassword(password))) {
+      res.cookie("jwt", generateToken(user._id), {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
       res.json({
         _id: user._id,
         name: user.name,
         firstname: user.firstname,
         mail: user.mail,
-        token: generateToken(user._id),
       });
     } else {
       res.status(401);

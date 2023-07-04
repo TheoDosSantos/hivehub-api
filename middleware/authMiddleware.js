@@ -3,11 +3,11 @@ const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 
 const protect = asyncHandler(async (req, res, next) => {
-  let token = req.headers.authorization;
-  if (token && token.startsWith("Bearer")) {
+  let cookieToken = req.cookies["jwt"];
+  if (cookieToken) {
     try {
-      const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select("-password");
+      const decoded = jwt.verify(cookieToken, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.id);
       next();
     } catch (err) {
       res.status(401);
