@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 const moment = require("moment");
 
 const today = moment(new Date()).format("yyyy-MM-DD[T]HH:mm");
-console.log(today);
 
 // Get all rooms
 const getAllRooms = asyncHandler(async (req, res) => {
