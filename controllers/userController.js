@@ -125,6 +125,22 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Logout a user
+const logoutUser = asyncHandler(async (req, res) => {
+  try {
+    res.cookie("jwt", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true,
+      sameSite: "none",
+    });
+    res.status(200).json({ message: "User logged out" });
+  } catch (error) {
+    res.status(500);
+    throw new Error(error.message);
+  }
+});
+
 module.exports = {
   getAllUsers,
   getUser,
@@ -132,4 +148,5 @@ module.exports = {
   updateUser,
   deleteUser,
   authUser,
+  logoutUser,
 };
