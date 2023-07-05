@@ -30,6 +30,6 @@ router.delete("/:id", protect, deleteRoom);
 router.put("/book/:id", protect, bookRoom);
 
 // Get available rooms
-router.get("/available/date", protect, getAvailableRooms);
+router.post("/available/date", protect, getAvailableRooms);
 
 module.exports = router;
