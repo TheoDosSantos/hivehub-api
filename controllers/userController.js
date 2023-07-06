@@ -141,6 +141,16 @@ const logoutUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Get current logged in user
+const getCurrentUser = asyncHandler(async (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    res.status(500);
+    throw new Error(error.message);
+  }
+});
+
 module.exports = {
   getAllUsers,
   getUser,
@@ -149,4 +159,5 @@ module.exports = {
   deleteUser,
   authUser,
   logoutUser,
+  getCurrentUser,
 };

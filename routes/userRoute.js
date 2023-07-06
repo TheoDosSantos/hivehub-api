@@ -8,6 +8,7 @@ const {
   deleteUser,
   authUser,
   logoutUser,
+  getCurrentUser,
 } = require("../controllers/userController");
 const protect = require("../middleware/authMiddleware");
 
@@ -31,5 +32,8 @@ router.post("/login", authUser);
 
 // Logout a user
 router.post("/logout", logoutUser);
+
+// Get current logged in user
+router.get("/log/current", protect, getCurrentUser)
 
 module.exports = router;
