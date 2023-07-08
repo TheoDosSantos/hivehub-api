@@ -15,7 +15,7 @@ const FRONT_URL = process.env.FRONT_URL;
 
 const corsOptions = {
   credentials: true,
-  origin: [FRONT_URL, "http://example.com"],
+  origin: [FRONT_URL, "http://localhost:3000"],
   optionsSuccessStatus: 200,
 };
 app.use(cookieParser());
